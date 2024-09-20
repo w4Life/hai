@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gowebapp
+  labels:
+    app: gowebapp
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gowebapp
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: gowebapp
+        tier: frontend
+    spec:
+      containers:
+        - name: gowebapp
+          env:
+            - name: DB_PASSWORD
+              value: mypassword
+          image: registry-kubeacademy-w13-s098.tnz-tanzu-prd4.strigo.tanzu.academy/gowebapp:v1
+          ports:
+            - containerPort: 8080
